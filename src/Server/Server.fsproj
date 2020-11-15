@@ -9,6 +9,7 @@
   <ItemGroup>
     <None Include="paket.references" />
     <Compile Include="DataStorage.fs" />
+    <Compile Include="Migrations.fs" />
     <Compile Include="ProductivityController.fs" />
     <Compile Include="WayshController.fs" />
     <Compile Include="Random.fs" />

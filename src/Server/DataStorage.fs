@@ -33,3 +33,10 @@ type Storage () =
         messages.Insert message |> ignore
         database.Dispose()
         Ok ()
+
+    member _.Migration (migration : Message list) =
+        let initialize = messages.FindAll () |> List.ofSeq
+        if initialize.IsEmpty then
+            migration |> List.iter (fun message -> messages.Insert message |> ignore)
+        database.Dispose()
+        Ok ()

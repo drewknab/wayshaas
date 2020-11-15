@@ -4,6 +4,5 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Shared.fs" />
-    <Compile Include="Migrations.fs" />
   </ItemGroup>
 </Project>

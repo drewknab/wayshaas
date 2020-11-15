@@ -9,8 +9,7 @@ open Router
 
 let storage = Storage()
 
-if storage.GetMessages() |> Seq.isEmpty then
-    Migrations.messages |> List.iter (fun message -> storage.AddMessage(message) |> ignore)
+storage.Migration Migrations.messages |> ignore
 
 let app =
     application {
