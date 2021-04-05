@@ -12,7 +12,7 @@
     <Compile Include="Migrations.fs" />
     <Compile Include="ProductivityController.fs" />
     <Compile Include="WayshController.fs" />
-    <Compile Include="Random.fs" />
+    <Compile Include="RandomController.fs" />
     <Compile Include="Router.fs" />
     <Compile Include="Server.fs" />
   </ItemGroup>

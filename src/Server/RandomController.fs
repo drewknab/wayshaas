@@ -3,6 +3,8 @@ module Random
 open System
 open DataStorage
 open Shared
+open Saturn
+open Microsoft.AspNetCore.Http
 
 let random = Random()
 let storage = Storage()
@@ -18,7 +20,7 @@ let randomId (ids : string List) =
     //ids.[random.Next (ids.Length - 1)]
 
 // Some error here
-let getRandom _ =
+let randomNote (context : HttpContext) =
     let messages = storage.GetMessages()
 
     let id =
@@ -28,3 +30,8 @@ let getRandom _ =
 
     messages
     |> List.filter (fun message -> message.Id = id)
+    |> Controller.json context
+
+let randomController = controller {
+    index randomNote
+}
