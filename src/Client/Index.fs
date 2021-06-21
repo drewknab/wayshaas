@@ -32,28 +32,31 @@ let init () =
                 ]
             MessageType = "productivity"
         }
+
     let getMessages() = fetchMessages "random"
+
     let cmd = Cmd.OfPromise.perform getMessages () GotMessages
+
     model, cmd
 
 let testMessage model =
-    if model.MessageType = "waysh" then "productivity"
-    else "waysh"
+    model.Messages.[0].Category
+
 let handleCommand messages =
     Cmd.OfPromise.perform messages () GotMessages
 
 let update msg model =
     match msg with
     | GotMessages messages ->
-        { model with Messages = messages}, Cmd.none
+        { model with Messages = messages ; MessageType = messages.[0].Category }, Cmd.none
     | WayshMessages ->
         let getMessages() = fetchMessages "waysh"
         let cmd = Cmd.OfPromise.perform getMessages () GotMessages
-        { model with MessageType = testMessage model },  cmd
+        { model with MessageType = "Waysh" },  cmd
     | ProductivityMessages ->
         let getMessages() = fetchMessages "productivity"
         let cmd = Cmd.OfPromise.perform getMessages () GotMessages
-        { model with MessageType = testMessage model },  cmd
+        { model with MessageType = "Productivity" },  cmd
     | RandomMessage ->
         let getMessages() = fetchMessages "random"
         let cmd = Cmd.OfPromise.perform getMessages () GotMessages
@@ -70,7 +73,6 @@ let renderButton dispatch dispatchMessage text =
     Button.a
         [
             Button.Color IsPrimary
-            //Button.Disabled (Todo.isValid model.Input |> not)
             Button.OnClick (fun _ -> dispatch dispatchMessage)
         ]
         [ str (sprintf "%s" text) ]
